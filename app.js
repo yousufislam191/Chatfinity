@@ -8,6 +8,9 @@ const {
   notFoundHandler,
   errorHandler,
 } = require("./middlewares/common/errorHandler");
+const loginRouter = require("./routes/login.routes");
+const userRouter = require("./routes/user.routes");
+const inboxRouter = require("./routes/inbox.routes");
 
 app.set("view engine", "ejs");
 
@@ -16,9 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.get("/", (req, res) => {
-//   res.status(200).render("home", {});
-// });
+app.use("/", loginRouter);
+app.use("/users", userRouter);
+app.use("/inbox", inboxRouter);
+
 app.use(notFoundHandler);
 app.use(errorHandler);
 
