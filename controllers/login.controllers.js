@@ -1,7 +1,5 @@
 const getLogin = (req, res, next) => {
-  res.render("login", {
-    title: "Login - Chatfinity",
-  });
+  return res.render("login");
 };
 
 module.exports = {
