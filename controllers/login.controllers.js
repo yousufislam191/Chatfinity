@@ -1,5 +1,5 @@
 const getLogin = (req, res, next) => {
-  return res.render("login");
+  return res.render("index");
 };
 
 module.exports = {

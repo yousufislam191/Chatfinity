@@ -1,5 +1,5 @@
 const getUser = (req, res, next) => {
-  return res.render("user");
+  return res.render("users");
 };
 
 module.exports = {
