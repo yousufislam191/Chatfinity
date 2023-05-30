@@ -1,0 +1,27 @@
+<%- include('./header.ejs'); %>
+
+    <div id="login-container">
+        <div id="left-column"></div>
+        <div id="branding">
+            <img src="./images/logo.png" />
+            <h1>Sign up - Chatfinity</h1>
+        </div>
+        <div id="login-form">
+            <form method="post" action="">
+                <input type="text" placeholder="enter name" name="name" />
+                <p class="error show">This is error</p>
+                <input type="text" placeholder="enter email" name="email" />
+                <input type="text" placeholder="enter mobile" name="mobile" />
+                <input type="password" placeholder="enter password" name="password" />
+                <input type="file" name="avatar" />
+                <input type="submit" value="Sign up" />
+            </form>
+            <div id="login-down-area">
+                <p>Have an account?</p>
+                <p><a class="btn" href="/">Login</a></p>
+            </div>
+        </div>
+    </div>
+    </body>
+
+    </html>

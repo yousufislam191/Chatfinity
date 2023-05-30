@@ -9,6 +9,7 @@ const {
   errorHandler,
 } = require("./middlewares/common/errorHandler");
 const loginRouter = require("./routes/login.routes");
+const signupRouter = require("./routes/signup.routes");
 const userRouter = require("./routes/user.routes");
 const inboxRouter = require("./routes/inbox.routes");
 
@@ -20,6 +21,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", loginRouter);
+app.use("/signup", signupRouter);
 app.use("/users", userRouter);
 app.use("/inbox", inboxRouter);
 
