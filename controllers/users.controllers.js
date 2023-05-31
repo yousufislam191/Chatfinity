@@ -2,8 +2,15 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/users.model");
 
-const getUser = (req, res, next) => {
-  return res.render("users");
+const getUser = async (req, res, next) => {
+  try {
+    const users = await User.find({ role: "user" });
+    res.render("users", {
+      users: users,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 // for create new user and send email activation notification
