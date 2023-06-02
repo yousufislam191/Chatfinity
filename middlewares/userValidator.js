@@ -78,4 +78,42 @@ const signupValidationHandler = function (req, res, next) {
     });
   }
 };
-module.exports = { signUpValidator, signupValidationHandler };
+
+const loginInValidator = [
+  check("email")
+    .trim()
+    .normalizeEmail()
+    .notEmpty()
+    .withMessage("Email is missing")
+    .isEmail()
+    .withMessage("Invalid email address")
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+    .withMessage("Invalid email address"),
+  check("password")
+    .trim()
+    .notEmpty()
+    .withMessage("Password is missing")
+    .isLength({ min: 8 })
+    .withMessage("Invalid password"),
+];
+
+const loginValidationHandler = function (req, res, next) {
+  const errors = validationResult(req);
+  const mappedErrors = errors.mapped();
+  if (Object.keys(mappedErrors).length === 0) {
+    next();
+  } else {
+    res.render("index", {
+      data: {
+        email: req.body.email,
+      },
+      errors: mappedErrors,
+    });
+  }
+};
+module.exports = {
+  signUpValidator,
+  signupValidationHandler,
+  loginInValidator,
+  loginValidationHandler,
+};

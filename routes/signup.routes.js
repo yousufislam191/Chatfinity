@@ -1,5 +1,7 @@
-const { getSignup } = require("../controllers/signup.controllers");
-const { createNewUser } = require("../controllers/users.controllers");
+const {
+  getSignup,
+  createNewUser,
+} = require("../controllers/signup.controllers");
 const avatarUpload = require("../middlewares/avatarUploads");
 const {
   decorateHtmlResponse,

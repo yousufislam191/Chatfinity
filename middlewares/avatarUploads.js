@@ -12,7 +12,7 @@ const avatarUpload = (req, res, next) => {
     if (err) {
       res.status(500).json({
         errors: {
-          avater: {
+          avatar: {
             msg: err.message,
           },
         },
