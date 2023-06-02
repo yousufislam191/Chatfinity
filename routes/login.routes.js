@@ -1,4 +1,5 @@
 const { getLogin, login, logout } = require("../controllers/login.controllers");
+const { redirectLoggedIn } = require("../middlewares/common/checkLogin");
 const {
   decorateHtmlResponse,
 } = require("../middlewares/common/decorateHtmlResponse");
@@ -9,7 +10,7 @@ const {
 
 const router = require("express").Router();
 
-router.get("/", decorateHtmlResponse("Login"), getLogin);
+router.get("/", decorateHtmlResponse("Login"), redirectLoggedIn, getLogin);
 router.post(
   "/",
   decorateHtmlResponse("Login"),
