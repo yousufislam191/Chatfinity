@@ -59,7 +59,13 @@ const login = async (req, res, next) => {
   }
 };
 
+const logout = (req, res) => {
+  res.clearCookie(process.env.COOKIE_NAME);
+  res.send("logged out");
+};
+
 module.exports = {
   getLogin,
   login,
+  logout,
 };

@@ -19,7 +19,7 @@
       </div>
     </div>
     <div id="new-message-container">
-      <a href="#">Logout</a>
+      <a href="#" onclick="logout()">Logout</a>
     </div>
     <div id="chat-title">
       <span>Emran</span>
@@ -61,6 +61,23 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const logoutToast = Toastify({
+      text: "You are being logged out...",
+      duration: 1000,
+    });
+
+    function logout() {
+      fetch("/", {
+        method: "DELETE",
+      });
+      logoutToast.showToast();
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 1000);
+    }
+  </script>
   </body>
 
   </html>

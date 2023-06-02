@@ -1,4 +1,4 @@
-const { getLogin, login } = require("../controllers/login.controllers");
+const { getLogin, login, logout } = require("../controllers/login.controllers");
 const {
   decorateHtmlResponse,
 } = require("../middlewares/common/decorateHtmlResponse");
@@ -17,5 +17,6 @@ router.post(
   loginValidationHandler,
   login
 );
+router.delete("/", logout);
 
 module.exports = router;
