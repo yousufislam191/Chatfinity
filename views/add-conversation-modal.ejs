@@ -1,0 +1,59 @@
+<div class="modal-wrapper" id="add-conversation-modal">
+    <div class="modal">
+        <a onclick="closeModal()" class="modal-close">+</a>
+        <div class="modal-title">
+            <h2>Create New Conversation</h2>
+        </div>
+        <div class="modal-body">
+            <form id="add-conversation-form">
+                <input type="text" placeholder="search user by name or email" name="user" id="user"
+                    autocomplete="off" />
+                <p class="error"></p>
+                <div class="search_users"></div>
+                <input type="submit" value="Submit" class="hide" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const modal = document.querySelector("#add-conversation-modal");
+    // typing detector
+    let typingTimer;
+    const doneTypingInterval = 500;
+    const input = document.querySelector("input#user");
+    const conversation_list = document.querySelector("#conversation-list");
+    let users_placeholder = document.querySelector(".search_users");
+
+    // conversation created failure toast
+    const conversationFailureToast = Toastify({
+        text: "Error creating a conversation!",
+        duration: 1000,
+    });
+
+    function closeModal() {
+        modal.style.display = "none";
+        // reset
+        users_placeholder.style.display = "none";
+        input.value = "";
+    }
+    function openModal() {
+        modal.style.display = "block";
+    }
+
+    //on keyup, start the countdown
+    input.addEventListener("keyup", function () {
+        clearTimeout(typingTimer);
+        // reset
+        users_placeholder.style.display = "none";
+
+        if (input.value) {
+            typingTimer = setTimeout(searchUsers, doneTypingInterval); //user is "finished typing," send search request
+        }
+    });
+
+    //on keydown, clear the countdown
+    input.addEventListener("keydown", function () {
+        clearTimeout(typingTimer);
+    });
+</script>

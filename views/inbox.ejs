@@ -1,7 +1,11 @@
 <%- include('./header.ejs'); %>
   <div id="chat-container">
     <div id="search-container">
-      <input type="text" placeholder="Search" />
+      <!-- <input type="text" placeholder="Search" /> -->
+      <div class="new-message-container" onclick="openModal()">
+        <a href="#"><img src="./images/search.png" alt="Search" /></a>
+      </div>
+
       <a href="/users"><img src="./images/all_users.png" alt="All users" /></a>
     </div>
     <div id="conversation-list">
@@ -62,22 +66,25 @@
     </div>
   </div>
 
-  <script>
-    const logoutToast = Toastify({
-      text: "You are being logged out...",
-      duration: 1000,
-    });
 
-    function logout() {
-      fetch("/", {
-        method: "DELETE",
+  <%- include('./add-conversation-modal.ejs'); %>
+
+    <script>
+      const logoutToast = Toastify({
+        text: "You are being logged out...",
+        duration: 1000,
       });
-      logoutToast.showToast();
-      setTimeout(() => {
-        window.location.replace("/");
-      }, 1000);
-    }
-  </script>
-  </body>
 
-  </html>
+      function logout() {
+        fetch("/", {
+          method: "DELETE",
+        });
+        logoutToast.showToast();
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 1000);
+      }
+    </script>
+    </body>
+
+    </html>
