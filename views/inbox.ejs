@@ -25,10 +25,22 @@
     <div id="new-message-container">
       <a href="#" onclick="logout()">Logout</a>
     </div>
+
     <div id="chat-title">
-      <span>Emran</span>
+      <span id="conversation-partner">Emran</span>
       <img src="./images/trash.png" alt="Delete Conversation" />
     </div>
+
+    <!-- <div id="chat-message-list">
+      <div class="nothing">select a conversation</div>
+    </div> -->
+
+    <form id="chat-form" method="post" enctype="multipart/form-data">
+      <label for="attachment"><img src="./images/attachment.png" alt="Add Attachment" /></label>
+      <input type="file" multiple name="attachment" class="hide" id="attachment" />
+      <input type="text" name="message" placeholder="Type a message" autocomplete="off" />
+    </form>
+
     <div id="chat-message-list">
       <div class="message-row other-message">
         <div class="message-content">
@@ -44,10 +56,11 @@
         </div>
       </div>
     </div>
-    <div id="chat-form">
+
+    <!-- <div id="chat-form">
       <img src="./images/attachment.png" alt=Add Attachment"" />
       <input type="text" placeholder="Type a message" />
-    </div>
+    </div> -->
   </div>
 
   <div class="modal-wrapper">
@@ -70,11 +83,20 @@
   <%- include('./add-conversation-modal.ejs'); %>
 
     <script>
+      const form = document.querySelector('#chat-form');
+      const messageContainer = document.querySelector('#chat-message-list');
+      const chatTitleContainer = document.querySelector('#conversation-partner');
+      const loggedinUserId = '<%= loggedInUser.userid %>';
+      const loggedinUserName = '<%= loggedInUser.username %>';
+      let participant = null; // selected conversation participant object
+      let current_conversation_id; // selected conversation id
+
+
+      // logout function 
       const logoutToast = Toastify({
         text: "You are being logged out...",
         duration: 1000,
       });
-
       function logout() {
         fetch("/", {
           method: "DELETE",
