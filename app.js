@@ -1,5 +1,6 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const moment = require("moment");
 const path = require("path");
 const app = express();
 require("./config/db");
@@ -19,6 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.static(path.join(__dirname, "public")));
+
+app.locals.moment = moment;
 
 app.use("/", loginRouter);
 app.use("/signup", signupRouter);

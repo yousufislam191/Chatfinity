@@ -88,6 +88,26 @@ input[type="submit"]:active {
   transform: scale(0.99);
 }
 
+.nothing {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 2.5rem;
+}
+
+.nothing img {
+  width: 100%;
+  max-width: 120px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .nothing {
+    display: none;
+  }
+}
+
 /* modal relayed styles */
 .modal-wrapper {
   position: absolute;
@@ -153,6 +173,45 @@ input[type="submit"]:active {
   transform: scale(0.95) rotate(45deg);
   background-color: var(--red);
   color: #fff;
+}
+
+.search_users {
+  display: none;
+  background: var(--secondary);
+  outline: none;
+  padding: 15px;
+  border: 1px solid var(--dark);
+  color: var(--light);
+  border-radius: 6px;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 130px;
+  width: 82%;
+  height: auto;
+}
+
+.search_users ul {
+  list-style-type: none;
+}
+
+.search_users ul > li {
+  background: var(--primary);
+  padding: 7px;
+  border: 1px solid var(--dark);
+  border-radius: 6px;
+  width: 100%;
+  height: auto;
+}
+
+.search_users .user {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  align-items: center;
+}
+
+.search_users .avatar img {
+  width: 24px;
+  height: 24px;
 }
 
 /* modal related responsive styles */
@@ -299,7 +358,8 @@ input[type="submit"]:active {
   font-size: 1rem;
 }
 
-.conversation-message {
+.conversation-date {
+  font-size: 1rem;
   grid-column: span 2;
   padding-left: 5px;
   white-space: nowrap;
@@ -369,7 +429,7 @@ input[type="submit"]:active {
 
 .message-row {
   display: grid;
-  grid-template-columns: 70%;
+  /* grid-template-columns: 70%; */
   margin-bottom: 20px;
 }
 
@@ -439,6 +499,7 @@ input[type="submit"]:active {
   border-top: 2px solid rgba(0, 0, 0, 0.25);
   padding-left: 10px;
   padding-right: 22px;
+  visibility: hidden;
 }
 
 #chat-form input {
