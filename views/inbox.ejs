@@ -8,20 +8,6 @@
 
       <a href="/users"><img src="./images/all_users.png" alt="All users" /></a>
     </div>
-    <!-- <div id="conversation-list">
-      <div class="conversation active">
-        <img src="./images/user1.png" alt="Sumit" />
-        <div class="title-text">Yousuf Islam</div>
-        <di class="created-date"> Apr 16 </di>
-        <div class="conversation-message">This is a message</div>
-      </div>
-      <div class="conversation">
-        <img src="./images/user2.png" alt="Sumit" />
-        <div class="title-text">Emran Hossain</div>
-        <di class="created-date"> Apr 16 </di>
-        <div class="conversation-message">This is a message</div>
-      </div>
-    </div> -->
 
     <div id="conversation-list">
       <% data.forEach(function(conversation) { %>
@@ -86,26 +72,6 @@
       <input type="text" name="message" placeholder="Type a message" autocomplete="off" />
     </form>
 
-    <!-- <div id="chat-message-list">
-      <div class="message-row other-message">
-        <div class="message-content">
-          <img src="./images/user1.png" alt="Sumit" />
-          <div class="message-text">Ok then</div>
-          <div class="message-time">Apr 16</div>
-        </div>
-      </div>
-      <div class="message-row you-message">
-        <div class="message-content">
-          <div class="message-text">Lorem ipsum dolor sit amet</div>
-          <div class="message-time">Apr 16</div>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- <div id="chat-form">
-      <img src="./images/attachment.png" alt=Add Attachment"" />
-      <input type="text" placeholder="Type a message" />
-    </div> -->
   </div>
 
   <div class="modal-wrapper">
@@ -131,6 +97,7 @@
       const form = document.querySelector('#chat-form');
       const messageContainer = document.querySelector('#chat-message-list');
       const chatTitleContainer = document.querySelector('#conversation-partner');
+      const chatTitleArea = document.querySelector('#chat-title');
       const loggedinUserId = '<%= loggedInUser.userid %>';
       const loggedinUserName = '<%= loggedInUser.username %>';
       let participant = null; // selected conversation participant object
@@ -149,6 +116,7 @@
 
         if (!result.errors && result.data) {
           form.style.visibility = 'visible';
+          chatTitleArea.style.visibility = 'visible';
 
           const { data, user, conversation_id } = result;
 

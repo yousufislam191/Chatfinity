@@ -100,7 +100,7 @@
     }
 
     // create Conversation
-    async function createConversation(participant_id, name, avatar) {
+    const createConversation = async (participant_id, name, avatar) => {
         try {
             const response = await fetch("/inbox/conversation", {
                 method: "POST",

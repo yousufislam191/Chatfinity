@@ -66,7 +66,7 @@ const addConversation = async (req, res, next) => {
     const newConversation = new Conversation({
       creator: {
         id: req.user.userid,
-        name: req.user.username,
+        name: req.user.name,
         avatar: req.user.avatar || null,
       },
       participant: {
