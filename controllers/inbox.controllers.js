@@ -28,8 +28,9 @@ const searchUser = async (req, res, next) => {
 
   try {
     // if (searchQuery !== "") {
+    let users;
     if (user !== "") {
-      const users = await User.find(
+      users = await User.find(
         {
           $or: [
             {
@@ -44,7 +45,6 @@ const searchUser = async (req, res, next) => {
         },
         "name avatar"
       );
-
       return res.json(users);
     } else {
       throw createError("You must provide some text to search!");

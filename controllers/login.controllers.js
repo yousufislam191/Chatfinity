@@ -39,8 +39,7 @@ const login = async (req, res, next) => {
 
         // set logged in user local identifier
         res.locals.loggedInUser = userObject;
-
-        res.render("inbox");
+        next();
       } else {
         throw createError("Wrong Password! Please try again.");
       }

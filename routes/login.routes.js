@@ -1,5 +1,9 @@
+const { getInbox } = require("../controllers/inbox.controllers");
 const { getLogin, login, logout } = require("../controllers/login.controllers");
-const { redirectLoggedIn } = require("../middlewares/common/checkLogin");
+const {
+  redirectLoggedIn,
+  checkLogin,
+} = require("../middlewares/common/checkLogin");
 const {
   decorateHtmlResponse,
 } = require("../middlewares/common/decorateHtmlResponse");
@@ -16,7 +20,9 @@ router.post(
   decorateHtmlResponse("Login"),
   loginInValidator,
   loginValidationHandler,
-  login
+  login,
+  checkLogin,
+  getInbox
 );
 router.delete("/", logout);
 
