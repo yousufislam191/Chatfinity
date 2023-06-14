@@ -5,9 +5,10 @@ const User = require("../models/users.model");
 
 const getUser = async (req, res, next) => {
   try {
-    const users = await User.find({ role: "user" });
+    const users = await User.find({ _id: { $ne: req.user.userid } });
     res.render("users", {
       users: users,
+      currentUserRole: req.user.role,
     });
   } catch (err) {
     next(err);
