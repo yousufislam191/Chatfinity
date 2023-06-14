@@ -21,11 +21,11 @@ const getInbox = async (req, res, next) => {
 // search user
 const searchUser = async (req, res, next) => {
   const user = req.body.user;
+  const particapateId = req.user.userid;
   // const searchQuery = user.replace("");
 
   // const name_search_regex = new RegExp(escape(searchQuery), "i");
   // const email_search_regex = new RegExp("^" + escape(searchQuery) + "$", "i");
-
   try {
     // if (searchQuery !== "") {
     let users;
@@ -45,7 +45,12 @@ const searchUser = async (req, res, next) => {
         },
         "name avatar"
       );
-      return res.json(users);
+
+      if (users[0]._id == particapateId) {
+        return res.json("You have the user");
+      } else {
+        return res.json(users);
+      }
     } else {
       throw createError("You must provide some text to search!");
     }

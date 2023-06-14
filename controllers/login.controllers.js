@@ -31,7 +31,7 @@ const login = async (req, res, next) => {
           expiresIn: process.env.JWT_TOKEN_EXPIRY,
         });
 
-        res.cookie(process.env.COOKIE_NAME, token, {
+        const cookie = res.cookie(process.env.COOKIE_NAME, token, {
           maxAge: process.env.JWT_TOKEN_EXPIRY,
           httpOnly: true,
           signed: true,
