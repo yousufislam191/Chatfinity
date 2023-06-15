@@ -93,6 +93,8 @@
 
   <%- include('./add-conversation-modal.ejs'); %>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.min.js"></script>
+
     <script>
       const form = document.querySelector('#chat-form');
       const messageContainer = document.querySelector('#chat-message-list');
@@ -102,6 +104,39 @@
       const loggedinUserName = '<%= loggedInUser.username %>';
       let participant = null; // selected conversation participant object
       let current_conversation_id; // selected conversation id
+
+      const socket = io('<%= process.env.APP_URL %>');
+      socket.on("new_message", data => {
+        if (data.message.conversation_id == current_conversation_id) {
+          const messageClass = data.message.sender.id === loggedinUserId ? 'you-message' : 'other-message';
+          const senderAvatar = data.message.sender.avatar ? `<img src="./uploads/avatars/${data.message.sender.avatar}" alt="${data.message.sender.name}" />` : `<img src="./images/nophoto.png" alt="${data.message.sender.name}" />`;
+
+          let attachments = '<div class="attachments">';
+          if (data.message.attachment && data.message.attachment.length > 0) {
+            data.message.attachment.forEach(attachment => {
+              attachments += `<img src="./uploads/attachments/${attachment}" /> `;
+            });
+          }
+          attachments += '</div>';
+
+          let messageHTML;
+          if (data.message.sender.id == loggedinUserId) {
+            messageHTML = `<div class="message-row ${messageClass}"><div class="message-content">
+              <div class="message-text">${data.message.message}</div>
+              ${attachments}
+              <div class="message-time">${moment(data.message.date_time).fromNow()}</div>
+            </div></div>`;
+          } else {
+            messageHTML = `<div class="message-row ${messageClass}"><div class="message-content">
+              ${senderAvatar}
+              <div class="message-text">${data.message.message}</div>
+              ${attachments}
+              <div class="message-time">${moment(data.message.date_time).fromNow()}</div>
+            </div></div>`;
+          }
+          document.querySelector('#chat-message-list > .message-row:first-child').insertAdjacentHTML('beforeBegin', messageHTML);
+        }
+      });
 
       // get messages of a conversation
       const getMessages = async (conversation_id, current_conversation_name) => {

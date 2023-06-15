@@ -1,4 +1,4 @@
-const { multipleUploader } = require("../utilities/multipleUploader");
+const multipleUploader = require("../utilities/multipleUploader");
 // for conversation file upload
 const attachmentUpload = (req, res, next) => {
   const upload = multipleUploader(

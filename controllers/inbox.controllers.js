@@ -146,7 +146,7 @@ const sendMessage = async (req, res, next) => {
         attachment: attachments,
         sender: {
           id: req.user.userid,
-          name: req.user.username,
+          name: req.user.name,
           avatar: req.user.avatar || null,
         },
         receiver: {

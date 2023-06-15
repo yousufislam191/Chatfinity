@@ -2,8 +2,14 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const moment = require("moment");
 const path = require("path");
-const app = express();
+const http = require("http");
 require("./config/db");
+
+const app = express();
+const server = http.createServer(app);
+
+const io = require("socket.io")(server);
+global.io = io;
 
 const {
   notFoundHandler,
