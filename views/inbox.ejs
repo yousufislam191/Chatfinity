@@ -146,7 +146,7 @@
           duration: 1000,
         });
 
-        let response = await fetch(`/inbox/messages/${conversation_id}`);
+        let response = await fetch(`http://localhost:5000/inbox/messages/${conversation_id}`);
         const result = await response.json();
 
         if (!result.errors && result.data) {
@@ -179,13 +179,13 @@
                 attachments += '</div>';
 
                 // final message html
-                let messageHTML = `<div class="message-row ${messageClass}"><div class="message-content">
-              ${showAvatar}
-              <div class="message-text">${message.text}</div>
-              ${attachments}
-              <div class="message-time">${moment(message.date_time).fromNow()}</div>
-            </div></div>`;
-
+                let messageHTML = `
+                    <div class="message-row ${messageClass}">
+                      <div class="message-content">${showAvatar}
+                        <div class="message-text">${message.text}</div>
+                      ${attachments}
+                      <div class="message-time">${moment(message.date_time).fromNow()}</div>
+                </div></div>`;
                 allMessages += messageHTML;
                 messageContainer.innerHTML = allMessages;
               });
